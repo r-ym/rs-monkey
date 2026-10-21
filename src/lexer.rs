@@ -1,6 +1,14 @@
 pub struct Lexer {
-    input: Vec<char>,
+    input: String,
     pos: usize,
+    rpos: usize,
+    ch: char,
+}
+
+impl Lexer {
+    fn new(s: &str) -> Self {
+        Lexer { input: s, pos: 0 }
+    }
 }
 
 #[cfg(test)]
