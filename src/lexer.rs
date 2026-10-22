@@ -1,13 +1,17 @@
-pub struct Lexer {
-    input: String,
+#[derive(Default, Debug)]
+pub struct Lexer<'a> {
+    input: &'a str,
     pos: usize,
     rpos: usize,
-    ch: char,
+    ch: &'a [u8],
 }
 
-impl Lexer {
-    fn new(s: &str) -> Self {
-        Lexer { input: s, pos: 0 }
+impl<'a> Lexer<'a> {
+    fn new(s: &'a str) -> Self {
+        Lexer {
+            input: s,
+            ..Lexer::default()
+        }
     }
 }
 
