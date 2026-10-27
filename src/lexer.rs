@@ -1,17 +1,29 @@
 #[derive(Default, Debug)]
-pub struct Lexer<'a> {
-    input: &'a str,
+pub struct Lexer {
+    input: Vec<char>,
     pos: usize,
     rpos: usize,
-    ch: &'a [u8],
+    ch: char,
 }
 
-impl<'a> Lexer<'a> {
-    fn new(s: &'a str) -> Self {
-        Lexer {
-            input: s,
+impl Lexer {
+    fn new(s: &str) -> Self {
+        let mut L = Lexer {
+            input: s.chars().collect(),
             ..Lexer::default()
+        };
+        L.read_char();
+        L
+    }
+
+    fn read_char(&mut self) -> () {
+        if self.rpos >= self.input.len() {
+            self.ch = '\0';
+        } else {
+            self.ch = self.input[self.rpos]
         }
+        self.pos = self.rpos;
+        self.rpos += 1;
     }
 }
 
